@@ -49,3 +49,51 @@ footer {
     color: #4979ff;
     text-decoration: underline;
 }
+
+h2 {
+    font-weight: normal;
+    margin: 20px auto;
+    text-align: center;
+}
+
+form {
+    width: 500px;
+    margin: 20px auto;
+}
+
+input {
+    display: block;
+    padding: 8px 16px;
+    font-size: 2em;
+    margin: 10px auto;
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 10px;
+    border: 3px solid #ccc;
+    outline: none !important;
+}
+
+input.valid {
+    border: 2px solid #36cc36;
+    outline: 0;
+}
+
+.invalid {
+    border: 2px solid orange;
+}
+
+input+p {
+    font-size: 0.9em;
+    font-weight: bold;
+    text-align: center;
+    margin: 0 19px;
+    color: orange;
+    opacity: 0;
+    height: 0;
+}
+
+input.invalid+p {
+    opacity: 1;
+    height: auto;
+    margin-bottom: 20px;
+}

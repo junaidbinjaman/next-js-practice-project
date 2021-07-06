@@ -8,9 +8,13 @@ export default function Home() {
     <>
       <Head>
         <title>Web Ninja | Home</title>
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+        ></link>
       </Head>
       <div className={Style.container}>
-        <h1 className={Style.title}>Hello, World</h1>
+        <h1 className="text-primary text-center mb-5">Hello, World</h1>
         <p className={Style.text}>
           Lorem ipsum dolor, sit amet consectetur adipisicing elit. Blanditiis
           hic adipisci voluptas alias dolores dolorem aliquid odio culpa

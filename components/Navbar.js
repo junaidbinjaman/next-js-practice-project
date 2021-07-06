@@ -23,6 +23,10 @@ const Navbar = () => {
       <Link href="/NinjaListing">
         <a> Ninja Listing </a>
       </Link>
+
+      <Link href="/Login">
+        <a>SignIn</a>
+      </Link>
     </nav>
   );
 };
