@@ -1,127 +1,29 @@
-'use client';
-
 import Image from 'next/image';
 import {Disclosure, DisclosureButton, DisclosurePanel} from '@headlessui/react';
 import {MinusSmallIcon, PlusSmallIcon} from '@heroicons/react/24/outline';
-import {
-    ArrowPathIcon,
-    CheckIcon,
-    CloudArrowUpIcon,
-    Cog6ToothIcon,
-    FingerPrintIcon,
-    LockClosedIcon,
-    ServerIcon,
-} from '@heroicons/react/20/solid';
+import {CheckIcon} from '@heroicons/react/20/solid';
+import CallToAction from '@/components/callToAction';
 
-const features = [
-    {
-        name: 'Push to deploy.',
-        description:
-            'Lorem ipsum, dolor sit amet consectetur adipisicing elit aute id magna.',
-        icon: CloudArrowUpIcon,
-    },
-    {
-        name: 'SSL certificates.',
-        description:
-            'Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo.',
-        icon: LockClosedIcon,
-    },
-    {
-        name: 'Simple queues.',
-        description:
-            'Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus.',
-        icon: ArrowPathIcon,
-    },
-    {
-        name: 'Advanced security.',
-        description:
-            'Lorem ipsum, dolor sit amet consectetur adipisicing elit aute id magna.',
-        icon: FingerPrintIcon,
-    },
-    {
-        name: 'Powerful API.',
-        description:
-            'Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo.',
-        icon: Cog6ToothIcon,
-    },
-    {
-        name: 'Database backups.',
-        description:
-            'Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus.',
-        icon: ServerIcon,
-    },
-];
-const tiers = [
-    {
-        name: 'Hobby',
-        id: 'tier-hobby',
-        href: '#',
-        priceMonthly: '$19',
-        description:
-            "The perfect plan if you're just getting started with our product.",
-        features: [
-            '25 products',
-            'Up to 10,000 subscribers',
-            'Advanced analytics',
-            '24-hour support response time',
-        ],
-        featured: false,
-    },
-    {
-        name: 'Enterprise',
-        id: 'tier-enterprise',
-        href: '#',
-        priceMonthly: '$49',
-        description: 'Dedicated support and infrastructure for your company.',
-        features: [
-            'Unlimited products',
-            'Unlimited subscribers',
-            'Advanced analytics',
-            'Dedicated support representative',
-            'Marketing automations',
-            'Custom integrations',
-        ],
-        featured: true,
-    },
-];
-const faqs = [
-    {
-        question: "What's the best thing about Switzerland?",
-        answer: "I don't know, but the flag is a big plus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.",
-    },
-    {
-        question: 'How do you make holy water?',
-        answer: 'You boil the hell out of it. Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam aut tempora vitae odio inventore fuga aliquam nostrum quod porro. Delectus quia facere id sequi expedita natus.',
-    },
-    {
-        question: 'What do you call someone with no body and no nose?',
-        answer: 'Nobody knows. Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa, voluptas ipsa quia excepturi, quibusdam natus exercitationem sapiente tempore labore voluptatem.',
-    },
-    {
-        question: 'Why do you never see elephants hiding in trees?',
-        answer: "Because they're so good at it. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.",
-    },
-    {
-        question: "Why can't you hear a pterodactyl go to the bathroom?",
-        answer: 'Because the pee is silent. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam, quas voluptatibus ex culpa ipsum, aspernatur blanditiis fugiat ullam magnam suscipit deserunt illum natus facilis atque vero consequatur! Quisquam, debitis error.',
-    },
-    {
-        question: 'Why did the invisible man turn down the job offer?',
-        answer: "He couldn't see himself doing it. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet perspiciatis officiis corrupti tenetur. Temporibus ut voluptatibus, perferendis sed unde rerum deserunt eius.",
-    },
-];
+// import data
+import {faqs} from '@/lib/data/faq';
+import {tiers} from '@/lib/data/tiers';
+import {features} from '@/lib/data/features';
+import VerticalPostCard from '@/components/verticalPostCard';
+import {type Post, postsAPI} from '@/lib/fetchAPI/post';
 
 function classNames(...classes: (string | undefined | boolean | null)[]) {
     return classes.filter(Boolean).join(' ');
 }
 
-export default function Home() {
+export default async function Home() {
+    const posts: Post[] = await postsAPI.getAll('1', '3');
+
     return (
         <div className='bg-white'>
             <div className='relative isolate overflow-hidden pt-14 pb-16 sm:pb-20'>
                 <Image
-                  width={100}
-                  height={100}
+                    width={100}
+                    height={100}
                     alt=''
                     src='https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2830&q=80&blend=fff&sat=-100&exp=15&blend-mode=overlay'
                     className='absolute inset-0 -z-10 size-full object-cover opacity-10'
@@ -483,6 +385,29 @@ export default function Home() {
                 </div>
             </div>
 
+            {/* Blog section */}
+            <section className='py-24 '>
+                <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
+                    <h2 className='font-manrope text-4xl font-bold text-gray-900 text-center mb-16'>
+                        Our latest blog
+                    </h2>
+                    <div className='flex justify-center  gap-y-8 lg:gap-y-0 flex-wrap md:flex-wrap lg:flex-nowrap lg:flex-row lg:justify-between lg:gap-x-8'>
+                        {posts?.map((post) => (
+                            <VerticalPostCard
+                                key={post.id}
+                                id={post.id}
+                                thumbnail={post.thumbnail}
+                                date='12-22-2025 10:03PM'
+                                avatar={post.avatar}
+                                title={post.title}
+                                slug={post.slug}
+                                author={post.authorName}
+                            />
+                        ))}
+                    </div>
+                </div>
+            </section>
+
             {/* FAQ section */}
             <div className='mx-auto mt-32 max-w-7xl px-6 sm:mt-56 lg:px-8 mb-15'>
                 <div className='mx-auto max-w-4xl'>
@@ -523,6 +448,9 @@ export default function Home() {
                     </dl>
                 </div>
             </div>
+
+            {/* Call to action */}
+            <CallToAction />
         </div>
     );
 }
