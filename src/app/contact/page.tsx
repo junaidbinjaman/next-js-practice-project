@@ -1,12 +1,8 @@
 import React from 'react';
 import HeroArea from './sections/heroArea';
 import ContactFormSection from './sections/contactFormSection';
-import { Metadata } from 'next';
 
-export const metadata: Metadata = {
-    title: 'Contact Us',
-    description: 'Get free support from us'
-}
+export const revalidate = false;
 
 export default function ContactPage() {
     return (

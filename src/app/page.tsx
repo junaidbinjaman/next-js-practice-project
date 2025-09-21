@@ -11,6 +11,8 @@ import {features} from '@/lib/data/features';
 import VerticalPostCard from '@/components/verticalPostCard';
 import {type Post, postsAPI} from '@/lib/fetchAPI/post';
 
+export const revalidate = 3600;
+
 function classNames(...classes: (string | undefined | boolean | null)[]) {
     return classes.filter(Boolean).join(' ');
 }

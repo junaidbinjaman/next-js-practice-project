@@ -20,7 +20,12 @@ async function fetcher<T>(url: string, page?: string, limit?: string): Promise<T
     urlObj.searchParams.append("limit", limit);
   }
 
-  const res = await fetch(urlObj.toString());
+  const res = await fetch(urlObj.toString(), {
+    cache: 'force-cache',
+    next: {
+      revalidate: 300
+    }
+  });
   if (!res.ok) throw new Error("API fetch failed");
   return res.json();
 }

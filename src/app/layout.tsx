@@ -16,11 +16,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-    title: 'Welcome to nextjs',
+    title: 'Home - Welcome to Live Blogs',
     description: 'This is a nextjs practice project',
-    icons: {
-        icon: './favicon.ico',
-    },
 };
 
 export default function RootLayout({

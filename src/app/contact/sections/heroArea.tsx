@@ -1,6 +1,7 @@
 'use client'
 import { usePosts } from '@/hooks/usePosts';
 import { LifebuoyIcon, NewspaperIcon, PhoneIcon } from '@heroicons/react/20/solid'
+import { Montserrat } from 'next/font/google';
 import Image from 'next/image'
 
 const cards = [
@@ -21,12 +22,13 @@ const cards = [
   },
 ]
 
-export default function HeroArea() {
-  const {isLoading, isEnabled, data} = usePosts();
+const montserrat = Montserrat({
+  subsets: ['latin'],
+  weight: ['400', '700'],
+  variable: '--font-montserrat',
+});
 
-  if (!isLoading) {
-    console.log(data);
-  }
+export default function HeroArea() {
 
   return (
     <div className="relative isolate overflow-hidden bg-white py-24 sm:py-32">
@@ -57,7 +59,7 @@ export default function HeroArea() {
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl lg:mx-0">
           <h2 className="text-5xl font-semibold tracking-tight text-gray-900 sm:text-7xl">Support center</h2>
-          <p className="mt-8 text-lg font-medium text-pretty text-gray-600 sm:text-xl/8">
+          <p className={`${montserrat.className} mt-8 text-lg font-medium text-pretty text-gray-600 sm:text-xl/8`}>
             Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet
             fugiat veniam occaecat fugiat.
           </p>
